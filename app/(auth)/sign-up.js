@@ -4,7 +4,7 @@ import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'expo-router';
 
-const signIn = () => {
+const SignUp = () => {
   return (
     <SafeAreaView className='bg-primary h-full'>
       <ScrollView>
@@ -15,8 +15,15 @@ const signIn = () => {
             resizeMethod='contain'
           />
           <Text className='text-2xl text-white text-semibold font-psemibold text-center mt-5'>
-            Login
+            Register
           </Text>
+          {/* username */}
+          <FormField
+            title='Username'
+            placeholder='JohnDoe'
+            otherStyles='mt-7'
+          />
+
           {/* email */}
           <FormField
             title='Email'
@@ -32,18 +39,18 @@ const signIn = () => {
           />
 
           {/* submit button */}
-          <CustomButton title='Sign In' containerStyles='w-full mt-7' />
+          <CustomButton title='Sign Up' containerStyles='w-full mt-7' />
 
           {/* dont have an account */}
           <View className='flex justify-center pt-5 flex-row gap-2'>
             <Text className='text-lg text-gray-100 font-pregular'>
-              Dont't have an account?
+              Have an account already?
             </Text>
             <Link
-              href='/sign-up'
+              href='/sign-in'
               className='text-lg font-psemibold text-secondary'
             >
-              Sign Up
+              Sign In
             </Link>
           </View>
         </View>
@@ -51,4 +58,4 @@ const signIn = () => {
     </SafeAreaView>
   );
 };
-export default signIn;
+export default SignUp;
