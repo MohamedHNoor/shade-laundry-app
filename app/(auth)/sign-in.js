@@ -6,7 +6,7 @@ import { Link } from 'expo-router';
 
 const signIn = () => {
   return (
-    <SafeAreaView className='bg-primary h-full'>
+    <SafeAreaView className='bg-white h-full'>
       <ScrollView>
         <View className='w-full justify-center items-center h-full px-4 my-6'>
           <Image
@@ -14,7 +14,7 @@ const signIn = () => {
             className='w-[150px] h-[150px]'
             resizeMethod='contain'
           />
-          <Text className='text-2xl text-white text-semibold font-psemibold text-center mt-5'>
+          <Text className='text-2xl text-primary text-semibold font-psemibold text-center mt-5'>
             Login
           </Text>
           {/* email */}
@@ -36,7 +36,7 @@ const signIn = () => {
 
           {/* dont have an account */}
           <View className='flex justify-center pt-5 flex-row gap-2'>
-            <Text className='text-lg text-gray-100 font-pregular'>
+            <Text className='text-lg text-slate-500 font-pregular'>
               Dont't have an account?
             </Text>
             <Link

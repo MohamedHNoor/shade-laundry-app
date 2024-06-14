@@ -6,7 +6,7 @@ import CustomButton from '../components/CustomButton';
 
 const index = () => {
   return (
-    <SafeAreaView className='bg-primary h-full'>
+    <SafeAreaView className='bg-white h-full'>
       <ScrollView contentContainerStyle={{ height: '100%' }}>
         <View className='w-full justify-center items-center h-full px-4'>
           <Image
@@ -16,13 +16,13 @@ const index = () => {
           />
 
           <View className=' mt-5'>
-            <Text className='text-3xl text-white font-bold text-center'>
+            <Text className='text-3xl text-primary font-bold text-center'>
               Discover Endless {'\n'} Possibilities with{' '}
               <Text className='text-secondary-200'>The Shade Laundry</Text>
             </Text>
           </View>
           {/* text */}
-          <Text className='text-sm font-pregular text-gray-100 mt-7 text-center'>
+          <Text className='text-sm font-pregular text-slate-400 mt-7 text-center'>
             Where Cleanliness Meets Innovation: Embark on a Journey of
             Impeccable Service with The Shade Laundry.
           </Text>

@@ -6,7 +6,7 @@ import { Link } from 'expo-router';
 
 const SignUp = () => {
   return (
-    <SafeAreaView className='bg-primary h-full'>
+    <SafeAreaView className='bg-white h-full'>
       <ScrollView>
         <View className='w-full justify-center items-center h-full px-4 my-6'>
           <Image
@@ -43,7 +43,7 @@ const SignUp = () => {
 
           {/* dont have an account */}
           <View className='flex justify-center pt-5 flex-row gap-2'>
-            <Text className='text-lg text-gray-100 font-pregular'>
+            <Text className='text-lg text-slate-500 font-pregular'>
               Have an account already?
             </Text>
             <Link
