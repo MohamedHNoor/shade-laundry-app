@@ -35,7 +35,7 @@ const index = () => {
           />
         </View>
       </ScrollView>
-      <StatusBar backgroundColor='#161622' style='light' />
+      <StatusBar style='auto' backgroundColor='auto' />
     </SafeAreaView>
   );
 };
