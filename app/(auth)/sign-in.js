@@ -3,8 +3,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 const signIn = () => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+  });
+
   return (
     <SafeAreaView className='bg-white h-full'>
       <ScrollView>
@@ -20,13 +26,17 @@ const signIn = () => {
           {/* email */}
           <FormField
             title='Email'
+            value={form.email}
             placeholder='example@gmail.com'
             keyboardType='email-address'
+            handleChangeText={(e) => setForm({ ...form, email: e })}
             otherStyles='mt-7'
           />
           {/* password */}
           <FormField
             title='Password'
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
             placeholder='Password'
             otherStyles='mt-7'
           />

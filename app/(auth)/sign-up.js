@@ -3,8 +3,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { Link } from 'expo-router';
+import { useState } from 'react';
 
 const SignUp = () => {
+  const [form, setForm] = useState({
+    email: '',
+    password: '',
+    username: '',
+  });
+
   return (
     <SafeAreaView className='bg-white h-full'>
       <ScrollView>
@@ -20,6 +27,8 @@ const SignUp = () => {
           {/* username */}
           <FormField
             title='Username'
+            value={form.username}
+            handleChangeText={(e) => setForm({ ...form, username: e })}
             placeholder='JohnDoe'
             otherStyles='mt-7'
           />
@@ -27,6 +36,8 @@ const SignUp = () => {
           {/* email */}
           <FormField
             title='Email'
+            value={form.email}
+            handleChangeText={(e) => setForm({ ...form, email: e })}
             placeholder='example@gmail.com'
             keyboardType='email-address'
             otherStyles='mt-7'
@@ -34,6 +45,8 @@ const SignUp = () => {
           {/* password */}
           <FormField
             title='Password'
+            value={form.password}
+            handleChangeText={(e) => setForm({ ...form, password: e })}
             placeholder='Password'
             otherStyles='mt-7'
           />
