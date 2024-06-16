@@ -1,9 +1,9 @@
 import { View, Text, ScrollView, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import FormField from '../../components/FormField';
-import CustomButton from '../../components/CustomButton';
 import { Link } from 'expo-router';
 import { useState } from 'react';
+import FormField from '../../components/FormField';
+import CustomButton from '../../components/CustomButton';
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -11,6 +11,10 @@ const SignUp = () => {
     password: '',
     username: '',
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const submit = () => {};
 
   return (
     <SafeAreaView className='bg-white h-full'>
@@ -21,7 +25,7 @@ const SignUp = () => {
             className='w-[150px] h-[150px]'
             resizeMethod='contain'
           />
-          <Text className='text-2xl text-white text-semibold font-psemibold text-center mt-5'>
+          <Text className='text-2xl text-primary text-semibold font-psemibold text-center mt-5'>
             Register
           </Text>
           {/* username */}
@@ -52,7 +56,12 @@ const SignUp = () => {
           />
 
           {/* submit button */}
-          <CustomButton title='Sign Up' containerStyles='w-full mt-7' />
+          <CustomButton
+            title='Sign Up'
+            containerStyles='w-full mt-7'
+            handlePress={submit}
+            isLoading={isSubmitting}
+          />
 
           {/* dont have an account */}
           <View className='flex justify-center pt-5 flex-row gap-2'>

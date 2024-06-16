@@ -1,4 +1,6 @@
-import { View, Text, TextInput } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { Feather } from '@expo/vector-icons';
 
 const FormField = ({
   title,
@@ -8,6 +10,8 @@ const FormField = ({
   otherStyles,
   ...props
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <View className={`space-y-2 ${otherStyles}`}>
       <Text className='text-base text-slate-500 font-pmedium'>{title}</Text>
@@ -19,9 +23,20 @@ const FormField = ({
           placeholder={placeholder}
           placeholderTextColor='#94a3b8'
           onChangeText={handleChangeText}
-          // secureTextEntry= {title === "Password" && !showPassword}
+          secureTextEntry={title === 'Password' && !showPassword}
           {...props}
         />
+        {title === 'Password' && (
+          <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+            <View>
+              {!showPassword ? (
+                <Feather name='eye-off' size={20} color='#64748b' />
+              ) : (
+                <Feather name='eye' size={20} color='#64748b' />
+              )}
+            </View>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
