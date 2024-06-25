@@ -1,49 +1,51 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '../lib/supabase';
-import { Session } from '@supabase/supabase-js';
+import { supabase } from '@/lib/supabase';
 
-const initialState = {
+const AuthContext = createContext({
   session: null,
-  profile: null,
   loading: true,
+  profile: null,
   isAdmin: false,
-};
+});
 
-const AuthContext = createContext(initialState);
-
-const AuthProvider = ({ children }) => {
+export default function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // fetch session
-  const fetchSession = async () => {
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-    setSession(session);
-    setIsLoading(false);
-
-    // fetch user profile
-    if (session) {
-      const {} = supabase.from().select();
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+
+      if (session) {
+        // fetch profile
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setProfile(data || null);
+      }
+
+      setLoading(false);
+    };
+
     fetchSession();
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
   }, []);
-
+  console.log(profile);
   return (
-    <AuthContext.Provider value={{ session, profile, isLoading }}>
+    <AuthContext.Provider
+      value={{ session, loading, profile, isAdmin: profile?.group === 'ADMIN' }}
+    >
       {children}
     </AuthContext.Provider>
   );
-};
+}
 
 export const useAuth = () => useContext(AuthContext);
-
-export default AuthProvider;

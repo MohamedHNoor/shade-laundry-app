@@ -7,9 +7,15 @@ import { ActivityIndicator } from 'react-native';
 import { useAuth } from '../providers/AuthProvider';
 
 const index = () => {
-  const { session, isLoading } = useAuth();
+  const { session, loading } = useAuth();
 
-  if (!isLoading && session) return <Redirect href='/home' />;
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  if (!session) {
+    return <Redirect href={'/sign-in'} />;
+  }
 
   return (
     <SafeAreaView className='bg-white h-full'>
