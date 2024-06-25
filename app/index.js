@@ -3,8 +3,14 @@ import { StatusBar } from 'expo-status-bar';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/CustomButton';
+import { ActivityIndicator } from 'react-native';
+import { useAuth } from '../providers/AuthProvider';
 
 const index = () => {
+  const { session, isLoading } = useAuth();
+
+  if (!isLoading && session) return <Redirect href='/home' />;
+
   return (
     <SafeAreaView className='bg-white h-full'>
       <ScrollView contentContainerStyle={{ height: '100%' }}>

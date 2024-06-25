@@ -1,7 +1,10 @@
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
+
+import { supabase } from '../../lib/supabase';
+
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 
@@ -13,7 +16,30 @@ const signIn = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = async () => {
+    const { email, password } = form;
+
+    if (!email || !password) {
+      Alert.alert('Please provide both email and password');
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        Alert.alert('Error', error.message);
+        return;
+      }
+      router.replace('/home');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className='bg-white h-full'>

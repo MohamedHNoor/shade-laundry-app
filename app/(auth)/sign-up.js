@@ -1,7 +1,10 @@
-import { View, Text, ScrollView, Image } from 'react-native';
+import { View, Text, ScrollView, Image, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
+
+import { supabase } from '../../lib/supabase';
+
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 
@@ -9,12 +12,41 @@ const SignUp = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
-    username: '',
+    fullName: '',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {};
+  const submit = async () => {
+    const { email, password, fullName } = form;
+
+    if (!email || !password) {
+      Alert.alert('Please provide both email and password');
+      return;
+    }
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            fullName: fullName,
+          },
+        },
+      });
+      if (error) {
+        Alert.alert('Error', error.message);
+        return;
+      }
+      router.replace('/home');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <SafeAreaView className='bg-white h-full'>
@@ -30,10 +62,10 @@ const SignUp = () => {
           </Text>
           {/* username */}
           <FormField
-            title='Username'
-            value={form.username}
-            handleChangeText={(e) => setForm({ ...form, username: e })}
-            placeholder='JohnDoe'
+            title='Full Name'
+            value={form.fullName}
+            handleChangeText={(e) => setForm({ ...form, fullName: e })}
+            placeholder='Your name'
             otherStyles='mt-7'
           />
 
