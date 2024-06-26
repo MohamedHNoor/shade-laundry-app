@@ -4,11 +4,9 @@ import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '../../providers/AuthProvider';
 
 const AuthLayout = () => {
-  const { session } = useAuth();
+  const { session, loading } = useAuth();
 
-  if (session) {
-    return <Redirect href={'/home'} />;
-  }
+  if (!loading && session) return <Redirect href='/home' />;
 
   return (
     <>

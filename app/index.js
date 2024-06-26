@@ -9,13 +9,7 @@ import { useAuth } from '../providers/AuthProvider';
 const index = () => {
   const { session, loading } = useAuth();
 
-  if (loading) {
-    return <ActivityIndicator />;
-  }
-
-  if (!session) {
-    return <Redirect href={'/sign-in'} />;
-  }
+  if (!loading && session) return <Redirect href='/home' />;
 
   return (
     <SafeAreaView className='bg-white h-full'>
