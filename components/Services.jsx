@@ -8,7 +8,7 @@ const ServiceItem = ({ item, selectedService, onPress }) => {
   return (
     <TouchableOpacity
       className={`${
-        isSelected ? 'border border-primary' : ''
+        isSelected ? 'border-2 border-secondary' : ''
       } bg-white p-2 rounded-2xl flex justify-center items-center`}
       activeOpacity={0.7}
       onPress={() => onPress(item)}
