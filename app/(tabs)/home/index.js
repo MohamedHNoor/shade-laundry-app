@@ -10,6 +10,7 @@ import {
 import EmptyState from '../../../components/EmptyState';
 import { items, services } from '../../../assets/data';
 import Services from '../../../components/Services';
+import ServiceCard from '../../../components/ServiceCard';
 
 const index = () => {
   return (
@@ -19,7 +20,7 @@ const index = () => {
         keyExtractor={(item) => item.id}
         // list of services
         renderItem={({ item }) => {
-          return <Text className='text-3xl'>{item.id}</Text>;
+          return <ServiceCard item={item} />;
         }}
         // header
         ListHeaderComponent={() => (
@@ -44,7 +45,7 @@ const index = () => {
               </View>
             </View>
             {/* services */}
-            <View className='w-full flex-1 pt-5 pb-8'>
+            <View className=''>
               <Text className='text-xl font-psemibold  text-primary mb-3'>
                 Our Services
               </Text>
