@@ -15,7 +15,7 @@ const TabsLayout = () => {
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: '#161622',
+          backgroundColor: '#f9fafb',
         },
       }}
     >
@@ -25,8 +25,8 @@ const TabsLayout = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               className={`${
-                focused ? 'text-secondary-200' : 'text-white'
-              } text-[16px]`}
+                focused ? 'text-secondary' : 'text-primary'
+              } text-[18px]`}
             >
               Home
             </Text>
@@ -34,9 +34,9 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Feather name='home' size={24} color='#4ade80' />
+              <Feather name='home' size={30} color='#4ade80' />
             ) : (
-              <Feather name='home' size={24} color='white' />
+              <Feather name='home' size={30} color='#161622' />
             ),
         })}
       />
@@ -46,8 +46,8 @@ const TabsLayout = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               className={`${
-                focused ? 'text-secondary-200' : 'text-white'
-              } text-[16px]`}
+                focused ? 'text-secondary-200' : 'text-primary'
+              } text-[18px]`}
             >
               Basket
             </Text>
@@ -55,9 +55,9 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Ionicons name='basket' size={24} color='#4ade80' />
+              <Ionicons name='basket' size={30} color='#4ade80' />
             ) : (
-              <Ionicons name='basket' size={24} color='white' />
+              <Ionicons name='basket' size={30} color='#161622' />
             ),
         })}
       />
@@ -67,8 +67,8 @@ const TabsLayout = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               className={`${
-                focused ? 'text-secondary-200' : 'text-white'
-              } text-[16px]`}
+                focused ? 'text-secondary-200' : 'text-primary'
+              } text-[18px]`}
             >
               Profile
             </Text>
@@ -78,14 +78,14 @@ const TabsLayout = () => {
             focused ? (
               <MaterialCommunityIcons
                 name='account-details'
-                size={24}
+                size={30}
                 color='#4ade80'
               />
             ) : (
               <MaterialCommunityIcons
                 name='account-details'
-                size={24}
-                color='white'
+                size={30}
+                color='#161622'
               />
             ),
         })}
