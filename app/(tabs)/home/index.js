@@ -6,13 +6,18 @@ import {
   SafeAreaView,
   Image,
   FlatList,
+  Pressable,
 } from 'react-native';
 import EmptyState from '../../../components/EmptyState';
 import { items, services } from '../../../assets/data';
 import Services from '../../../components/Services';
 import ServiceCard from '../../../components/ServiceCard';
+import { useBasket } from '../../../providers/BasketProvider';
+import { Redirect, router } from 'expo-router';
 
 const index = () => {
+  const { total } = useBasket();
+
   return (
     <SafeAreaView className=''>
       <FlatList
@@ -57,12 +62,27 @@ const index = () => {
         )}
         // empty state
         ListEmptyComponent={() => (
-          <EmptyState
-            title='No Services Found'
-            subtitle='No Services created yet'
-          />
+          <EmptyState title='No Items Found' subtitle='No items created yet' />
         )}
       />
+      {total === 0 ? null : (
+        <Pressable className='bg-secondary p-3 rounded-2xl mx-3 my-3 flex flex-row justify-between items-center'>
+          <View>
+            <Text className='text-lg font-pmedium text-white'>
+              {items.length} items | R {total}
+            </Text>
+            <Text className='text-md font-pregular my-2 text-white'>
+              extra charges might apply
+            </Text>
+          </View>
+
+          <Pressable onPress={() => router.navigate('basket')}>
+            <Text className='text-white text-lg font-pmedium'>
+              Proceed to Basket
+            </Text>
+          </Pressable>
+        </Pressable>
+      )}
     </SafeAreaView>
   );
 };

@@ -2,7 +2,7 @@ import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
 import AuthProvider, { useAuth } from '../providers/AuthProvider';
-
+import BasketProvider from '../providers/BasketProvider';
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -28,11 +28,13 @@ const RootLayout = () => {
 
   return (
     <AuthProvider>
-      <Stack>
-        <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-        <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-        <Stack.Screen name='index' options={{ headerShown: false }} />
-      </Stack>
+      <BasketProvider>
+        <Stack>
+          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+          <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+          <Stack.Screen name='index' options={{ headerShown: false }} />
+        </Stack>
+      </BasketProvider>
     </AuthProvider>
   );
 };

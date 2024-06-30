@@ -1,6 +1,8 @@
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
 import { services } from '../assets/data';
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
+import ServiceCard from './ServiceCard'; // Ensure the correct path
+import { useBasket } from '../providers/BasketProvider';
 
 const ServiceItem = ({ item, selectedService, onPress }) => {
   const isSelected = selectedService?.id === item.id;
@@ -28,7 +30,7 @@ const ServiceItem = ({ item, selectedService, onPress }) => {
 };
 
 export default function Services() {
-  const [selectedService, setSelectedService] = useState(null);
+  const { selectedService, setSelectedService } = useBasket();
   const handlePress = useCallback(
     (item) => {
       setSelectedService((prev) => (prev?.id === item.id ? null : item));
@@ -37,18 +39,20 @@ export default function Services() {
   );
 
   return (
-    <FlatList
-      data={services}
-      horizontal
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <ServiceItem
-          item={item}
-          selectedService={selectedService}
-          onPress={handlePress}
-        />
-      )}
-      contentContainerStyle={{ gap: 10 }}
-    />
+    <>
+      <FlatList
+        data={services}
+        horizontal
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <ServiceItem
+            item={item}
+            selectedService={selectedService}
+            onPress={handlePress}
+          />
+        )}
+        contentContainerStyle={{ gap: 10 }}
+      />
+    </>
   );
 }
