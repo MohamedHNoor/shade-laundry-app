@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react';
+import { randomUUID } from 'expo-crypto';
 
 const BasketContext = createContext({
   items: [],
@@ -16,14 +17,45 @@ const BasketProvider = ({ children }) => {
 
   // add items
   const addItem = (product, service) => {
-    console.log('Added to basket');
+    // if already in cart, increment quantity
+    const existingItem = items.find(
+      (item) => item.product === product && item.service === service.name
+    );
+
+    if (existingItem) {
+      updateQuantity(existingItem.id, 1);
+      return;
+    }
+
+    const newCartItem = {
+      id: randomUUID(), // generate
+      product,
+      product_id: product.id,
+      service: service.name,
+      quantity: 1,
+    };
+
+    setItems([newCartItem, ...items]);
   };
 
   // update quantity
-  const updateQuantity = () => {};
+  const updateQuantity = (itemId, amount) => {
+    setItems(
+      items
+        .map((item) =>
+          item.id !== itemId
+            ? item
+            : { ...item, quantity: item.quantity + amount }
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
 
   // total price
-  const total = 0;
+  const total = items.reduce(
+    (sum, item) => (sum += item.product.price * item.quantity),
+    0
+  );
 
   return (
     <BasketContext.Provider

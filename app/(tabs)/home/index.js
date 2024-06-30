@@ -16,10 +16,10 @@ import { useBasket } from '../../../providers/BasketProvider';
 import { Redirect, router } from 'expo-router';
 
 const index = () => {
-  const { total } = useBasket();
+  const { items: basketItems, total } = useBasket();
 
   return (
-    <SafeAreaView className=''>
+    <SafeAreaView className='flex-1'>
       <FlatList
         data={items}
         keyExtractor={(item) => item.id}
@@ -55,7 +55,6 @@ const index = () => {
                 Our Services
               </Text>
 
-              {/* <Trending posts={latestPosts ?? []} /> */}
               <Services Services={services ?? []} />
             </View>
           </View>
@@ -65,11 +64,11 @@ const index = () => {
           <EmptyState title='No Items Found' subtitle='No items created yet' />
         )}
       />
-      {total === 0 ? null : (
-        <Pressable className='bg-secondary p-3 rounded-2xl mx-3 my-3 flex flex-row justify-between items-center'>
+      {basketItems.length > 0 && (
+        <View className='bg-secondary p-3 rounded-2xl mx-3 my-3 flex flex-row justify-between items-center'>
           <View>
             <Text className='text-lg font-pmedium text-white'>
-              {items.length} items | R {total}
+              {basketItems.length} items | R {total}
             </Text>
             <Text className='text-md font-pregular my-2 text-white'>
               extra charges might apply
@@ -81,7 +80,7 @@ const index = () => {
               Proceed to Basket
             </Text>
           </Pressable>
-        </Pressable>
+        </View>
       )}
     </SafeAreaView>
   );
