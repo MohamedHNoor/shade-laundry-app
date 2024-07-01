@@ -22,7 +22,7 @@ const BasketScreen = () => {
       />
       {items.length === 0 && (
         <CustomButton
-          title='Go Back to home'
+          title='Go Back & Add Items'
           handlePress={() => router.back()}
           containerStyles='mx-5 mb-5'
         />
@@ -30,7 +30,7 @@ const BasketScreen = () => {
 
       {total !== 0 && (
         <>
-          <Text className='m-4 text-2xl font-medium'>Total: R{total}</Text>
+          <Text className='m-4 text-2xl font-psemibold'>Total: R{total}</Text>
           <CustomButton
             title='Checkout'
             // handlePress={() => router.push('/home')}

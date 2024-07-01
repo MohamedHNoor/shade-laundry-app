@@ -13,7 +13,7 @@ import { items, services } from '../../../assets/data';
 import Services from '../../../components/Services';
 import ServiceCard from '../../../components/ServiceCard';
 import { useBasket } from '../../../providers/BasketProvider';
-import { Redirect, router } from 'expo-router';
+import { router } from 'expo-router';
 
 const index = () => {
   const { items: basketItems, total } = useBasket();
