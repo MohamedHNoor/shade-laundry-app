@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  Pressable,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, Image, Alert, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { useBasket } from '../providers/BasketProvider';
 
@@ -33,10 +26,12 @@ const ServiceCard = ({ item }) => {
         resizeMode='contain'
       />
       <View>
-        <Text className='text-primary capitalize font-pregular w-20 mb-2'>
+        <Text className='text-primary capitalize font-psemibold w-20 mb-2'>
           {item.name}
         </Text>
-        <Text className='text-base text-gray-500'>R {item.price}</Text>
+        <Text className='text-base font-pregular text-secondary'>
+          R {item.price}
+        </Text>
       </View>
       <TouchableOpacity onPress={addToBasket}>
         <AntDesign name='plussquareo' size={28} color='#18B331' />
