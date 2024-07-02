@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
@@ -11,7 +11,7 @@ const OrderListItem = ({ order }) => {
 
   return (
     <Link href={`/${segments[0]}/orders/${order.id}`} asChild>
-      <Pressable className='bg-white p-4 rounded-lg flex-row justify-between items-center'>
+      <TouchableOpacity className='bg-white p-4 rounded-lg flex-row justify-between items-center'>
         <View>
           <Text className='font-bold my-1.5'>Order #{order.id}</Text>
           <Text className='text-gray-500'>
@@ -20,7 +20,7 @@ const OrderListItem = ({ order }) => {
         </View>
 
         <Text className='font-medium'>{order.status}</Text>
-      </Pressable>
+      </TouchableOpacity>
     </Link>
   );
 };

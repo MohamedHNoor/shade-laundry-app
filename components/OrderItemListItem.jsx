@@ -14,12 +14,12 @@ const OrderItemListItem = ({ item }) => {
         <Text className='font-psemibold text-lg mb-1.5 text-primary'>
           {item.products.name}
         </Text>
-        <View className='flex gap-2 justify-center '>
+        <View className='flex-row gap-2 items-center '>
           <Text className=' font-pmedium'>
             ${item.products.price.toFixed(2)}
           </Text>
-          <Text className='text-md font-pmedium text-md text-secondary-200'>
-            Service: {item.service}
+          <Text className='text-md font-pmedium text-md text-slate-500'>
+            {item.service}
           </Text>
         </View>
       </View>

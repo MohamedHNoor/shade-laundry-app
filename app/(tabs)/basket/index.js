@@ -10,7 +10,7 @@ const BasketScreen = () => {
   const { items, total } = useBasket();
 
   return (
-    <SafeAreaView className='flex  h-full'>
+    <SafeAreaView className='flex  h-full mt-3'>
       <FlatList
         data={items}
         keyExtractor={(item) => item.id.toString()} // Ensure the key is a string
@@ -20,13 +20,6 @@ const BasketScreen = () => {
           <EmptyState title='Your Backet is Empty' subtitle='Add Items' />
         )}
       />
-      {items.length === 0 && (
-        <CustomButton
-          title='Go Back & Add Items'
-          handlePress={() => router.back()}
-          containerStyles='mx-5 mb-5'
-        />
-      )}
 
       {total !== 0 && (
         <>
