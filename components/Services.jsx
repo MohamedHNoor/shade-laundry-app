@@ -1,5 +1,5 @@
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native';
-import { services } from '../assets/data';
+import { services } from '../assets/data/services';
 import { useCallback } from 'react';
 import ServiceCard from './ServiceCard'; // Ensure the correct path
 import { useBasket } from '../providers/BasketProvider';

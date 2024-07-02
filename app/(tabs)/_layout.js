@@ -19,6 +19,7 @@ const TabsLayout = () => {
         },
       }}
     >
+      {/* home */}
       <Tabs.Screen
         name='home'
         options={({ route }) => ({
@@ -40,6 +41,7 @@ const TabsLayout = () => {
             ),
         })}
       />
+      {/* basket */}
       <Tabs.Screen
         name='basket'
         options={({ route }) => ({
@@ -58,6 +60,28 @@ const TabsLayout = () => {
               <Ionicons name='basket' size={30} color='#4ade80' />
             ) : (
               <Ionicons name='basket' size={30} color='#161622' />
+            ),
+        })}
+      />
+      {/* orders */}
+      <Tabs.Screen
+        name='orders'
+        options={({ route }) => ({
+          tabBarLabel: ({ focused }) => (
+            <Text
+              className={`${
+                focused ? 'text-secondary-200' : 'text-primary'
+              } text-[18px]`}
+            >
+              Orders
+            </Text>
+          ),
+          headerShown: false,
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <Feather name='list' size={30} color='#4ade80' />
+            ) : (
+              <Feather name='list' size={30} color='#161622' />
             ),
         })}
       />

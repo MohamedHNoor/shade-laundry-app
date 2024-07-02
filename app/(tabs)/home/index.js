@@ -1,15 +1,14 @@
 import {
-  StyleSheet,
   Text,
   View,
-  ScrollView,
   SafeAreaView,
   Image,
   FlatList,
   Pressable,
 } from 'react-native';
 import EmptyState from '../../../components/EmptyState';
-import { items, services } from '../../../assets/data';
+import { products } from '../../../assets/data/products';
+import { services } from '../../../assets/data/services';
 import Services from '../../../components/Services';
 import ServiceCard from '../../../components/ServiceCard';
 import { useBasket } from '../../../providers/BasketProvider';
@@ -21,7 +20,7 @@ const index = () => {
   return (
     <SafeAreaView className='flex-1'>
       <FlatList
-        data={items}
+        data={products}
         keyExtractor={(item) => item.id}
         // list of services
         renderItem={({ item }) => {
