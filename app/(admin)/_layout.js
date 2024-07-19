@@ -6,18 +6,20 @@ import { useAuth } from '../../providers/AuthProvider';
 import { Redirect } from 'expo-router';
 
 const TabsLayout = () => {
-  const { session, loading } = useAuth();
+  const { session, loading, isAdmin } = useAuth();
 
-  if (!loading && !session) return <Redirect href='/(auth)/sign-in' />;
+  if (!loading && !session && !isAdmin)
+    return <Redirect href='/(auth)/sign-in' />;
 
   return (
     <Tabs
       screenOptions={{
         tabBarStyle: {
-          backgroundColor: '#f9fafb',
+          backgroundColor: '#f0fdf4',
         },
       }}
     >
+      <Tabs.Screen name='index' options={{ href: null }} />
       {/* home */}
       <Tabs.Screen
         name='home'
@@ -34,7 +36,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Feather name='home' size={30} color='#4ade80' />
+              <Feather name='home' size={30} color='#18B331' />
             ) : (
               <Feather name='home' size={30} color='#161622' />
             ),
@@ -47,7 +49,7 @@ const TabsLayout = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               className={`${
-                focused ? 'text-secondary-200' : 'text-primary'
+                focused ? 'text-secondary' : 'text-primary'
               } text-[18px]`}
             >
               Orders
@@ -56,7 +58,7 @@ const TabsLayout = () => {
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? (
-              <Feather name='list' size={30} color='#4ade80' />
+              <Feather name='list' size={30} color='#18B331' />
             ) : (
               <Feather name='list' size={30} color='#161622' />
             ),
@@ -68,7 +70,7 @@ const TabsLayout = () => {
           tabBarLabel: ({ focused }) => (
             <Text
               className={`${
-                focused ? 'text-secondary-200' : 'text-primary'
+                focused ? 'text-secondary' : 'text-primary'
               } text-[18px]`}
             >
               Profile
@@ -80,7 +82,7 @@ const TabsLayout = () => {
               <MaterialCommunityIcons
                 name='account-details'
                 size={30}
-                color='#4ade80'
+                color='#18B331'
               />
             ) : (
               <MaterialCommunityIcons

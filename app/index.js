@@ -1,4 +1,4 @@
-import { Redirect, router } from 'expo-router';
+import { Link, Redirect, router } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -34,11 +34,12 @@ const index = () => {
           </Text>
 
           {/* button */}
-          <CustomButton
-            title='Continue with Email'
-            handlePress={() => router.push('/sign-in')}
-            containerStyles='w-full mt-7'
-          />
+          <Link href={'/(user)'} asChild>
+            <CustomButton title='User' containerStyles='w-full mt-7' />
+          </Link>
+          <Link href={'/(admin)'} asChild>
+            <CustomButton title='Admin' containerStyles='w-full mt-7' />
+          </Link>
         </View>
       </ScrollView>
       <StatusBar style='auto' backgroundColor='auto' />
