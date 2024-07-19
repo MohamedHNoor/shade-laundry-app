@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Text } from 'react-native';
 import { useAuth } from '../../providers/AuthProvider';
@@ -41,28 +40,6 @@ const TabsLayout = () => {
             ),
         })}
       />
-      {/* basket */}
-      {/* <Tabs.Screen
-        name='basket'
-        options={({ route }) => ({
-          tabBarLabel: ({ focused }) => (
-            <Text
-              className={`${
-                focused ? 'text-secondary-200' : 'text-primary'
-              } text-[18px]`}
-            >
-              Basket
-            </Text>
-          ),
-          headerShown: false,
-          tabBarIcon: ({ focused }) =>
-            focused ? (
-              <Ionicons name='basket' size={30} color='#4ade80' />
-            ) : (
-              <Ionicons name='basket' size={30} color='#161622' />
-            ),
-        })}
-      /> */}
       {/* orders */}
       <Tabs.Screen
         name='orders'

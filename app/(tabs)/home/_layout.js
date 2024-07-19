@@ -13,9 +13,9 @@ export default function HomeLayout() {
               <Pressable>
                 {({ pressed }) => (
                   <Ionicons
-                    name='basket'
+                    name='basket-outline'
                     size={30}
-                    color='#4ade80'
+                    color='#161622'
                     style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
                   />
                 )}
