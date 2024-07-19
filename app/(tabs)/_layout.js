@@ -42,7 +42,7 @@ const TabsLayout = () => {
         })}
       />
       {/* basket */}
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name='basket'
         options={({ route }) => ({
           tabBarLabel: ({ focused }) => (
@@ -62,7 +62,7 @@ const TabsLayout = () => {
               <Ionicons name='basket' size={30} color='#161622' />
             ),
         })}
-      />
+      /> */}
       {/* orders */}
       <Tabs.Screen
         name='orders'

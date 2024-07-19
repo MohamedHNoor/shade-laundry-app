@@ -1,10 +1,16 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView } from 'react-native';
-import { router } from 'expo-router';
-import { useBasket } from '../../../providers/BasketProvider';
-import BasketListItems from '../../../components/BasketListItems';
-import EmptyState from '../../../components/EmptyState';
-import CustomButton from '../../../components/CustomButton';
+import { StatusBar } from 'expo-status-bar';
+import {
+  StyleSheet,
+  Text,
+  Platform,
+  FlatList,
+  SafeAreaView,
+} from 'react-native';
+import { useBasket } from '../providers/BasketProvider';
+import BasketListItems from '../components/BasketListItems';
+import EmptyState from '../components/EmptyState';
+import CustomButton from '../components/CustomButton';
 
 const BasketScreen = () => {
   const { items, total } = useBasket();
@@ -31,6 +37,7 @@ const BasketScreen = () => {
           />
         </>
       )}
+      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
     </SafeAreaView>
   );
 };
