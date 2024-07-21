@@ -4,7 +4,7 @@ import { View, Text, Image } from 'react-native';
 
 const OrderItemListItem = ({ item }) => {
   return (
-    <View className='bg-white rounded-lg p-1.5 flex-1 flex-row items-center'>
+    <View className='bg-white rounded-lg px-4 py-2 flex-1 flex-row items-center'>
       <Image
         source={{ uri: item.products.image || '' }}
         className='w-20 aspect-square self-center mr-2.5'
