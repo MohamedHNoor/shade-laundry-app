@@ -37,7 +37,7 @@ const index = () => {
           <Link href={'/(user)'} asChild>
             <CustomButton title='User' containerStyles='w-full mt-7' />
           </Link>
-          <Link href={'/(admin)'} asChild>
+          <Link href={'/sign-in'} asChild>
             <CustomButton title='Admin' containerStyles='w-full mt-7' />
           </Link>
         </View>
