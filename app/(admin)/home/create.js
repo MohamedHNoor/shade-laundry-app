@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, Image, ScrollView, TouchableOpacity } from 'react-native';
-import { Stack } from 'expo-router';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
+import { Stack, useLocalSearchParams } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import FormField from '../../../components/FormField';
 import CustomButton from '../../../components/CustomButton';
@@ -13,6 +20,9 @@ const create = () => {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
   const [errors, setErrors] = useState('');
+
+  const { id } = useLocalSearchParams();
+  const isUpdating = !!id;
 
   // reset values
   const resetFields = () => {
@@ -56,6 +66,7 @@ const create = () => {
     }
   };
 
+  // create product
   const onCreate = () => {
     if (!inputValidations()) {
       return;
@@ -64,10 +75,50 @@ const create = () => {
     // save in the database
     resetFields();
   };
+
+  // update product
+  const onUpdate = () => {
+    if (!inputValidations()) {
+      return;
+    }
+    console.warn('Updating product', name);
+    // save in the database
+    resetFields();
+  };
+
+  const onSubmit = () => {
+    if (isUpdating) {
+      // update function
+      onUpdate();
+    } else {
+      // create function
+      onCreate();
+    }
+  };
+
+  // delete product
+  const onDelete = () => {
+    console.warn('DELETE!!!');
+  };
+  const confirmDelete = () => {
+    Alert.alert('Confirm', 'Are you sure you want to delete this product?', [
+      {
+        text: 'Cancel',
+      },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: onDelete,
+      },
+    ]);
+  };
+
   return (
     <SafeAreaView className='bg-white h-full'>
       <ScrollView>
-        <Stack.Screen options={{ title: 'Create Product' }} />
+        <Stack.Screen
+          options={{ title: isUpdating ? 'Update Product' : 'Create Product' }}
+        />
         <View className='flex-1 justify-center p-4 my-6'>
           <TouchableOpacity onPress={pickImage}>
             <Image
@@ -96,10 +147,18 @@ const create = () => {
           />
           <Text className='text-red-500 px-4'>{errors}</Text>
           <CustomButton
-            title='Create'
-            containerStyles='w-full mt-5'
-            handlePress={onCreate}
+            title={isUpdating ? 'Update' : 'Create'}
+            containerStyles='w-full mt-5 mb-3'
+            handlePress={onSubmit}
           />
+          {isUpdating && (
+            <CustomButton
+              containerStyles='bg-transparent border border-red-500'
+              textStyles='text-red-500'
+              handlePress={confirmDelete}
+              title='Delete'
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
