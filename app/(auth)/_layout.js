@@ -1,10 +1,12 @@
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { Redirect, Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useAuth } from '../../providers/AuthProvider';
 
 const AuthLayout = () => {
-  const { session, loading } = useAuth();
+  const { session, loading, isAdmin } = useAuth();
+
+  if (loading) return <ActivityIndicator />;
 
   if (session) return <Redirect href='/' />;
 

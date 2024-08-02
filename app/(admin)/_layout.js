@@ -6,11 +6,11 @@ import { useAuth } from '../../providers/AuthProvider';
 import { Redirect } from 'expo-router';
 
 const TabsLayout = () => {
-  const { isAdmin, session } = useAuth();
+  const { isAdmin } = useAuth();
 
-  if (!isAdmin) return <Redirect href='/' />;
-
-  if (!session) return <Redirect href='/sign-in' />;
+  if (!isAdmin) {
+    return <Redirect href={'/'} />;
+  }
 
   return (
     <Tabs

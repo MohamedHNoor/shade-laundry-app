@@ -1,14 +1,16 @@
 import { Tabs } from 'expo-router';
 import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Text } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
 import { useAuth } from '../../providers/AuthProvider';
 import { Redirect } from 'expo-router';
 
 const TabsLayout = () => {
-  const { session, loading } = useAuth();
+  const { session } = useAuth();
 
-  if (!session) return <Redirect href='/sign-in' />;
+  if (!session) {
+    return <Redirect href={'/'} />;
+  }
 
   return (
     <Tabs

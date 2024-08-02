@@ -7,14 +7,18 @@ import { ActivityIndicator } from 'react-native';
 import { useAuth } from '../providers/AuthProvider';
 
 const index = () => {
-  const { session, loading, isAdmin, profile } = useAuth();
+  const { session, loading, isAdmin } = useAuth();
 
-  if (loading) return <ActivityIndicator />;
+  if (loading) {
+    return <ActivityIndicator />;
+  }
 
-  if (!session) return <Redirect href='/sign-in' />;
+  if (!session) {
+    return <Redirect href={'/sign-in'} />;
+  }
 
-  if (profile?.group === 'ADMIN') {
-    <Redirect href='/' />;
+  if (!isAdmin) {
+    return <Redirect href={'/(user)'} />;
   }
 
   return (
@@ -39,21 +43,16 @@ const index = () => {
           </Text>
 
           <CustomButton
-            title={isAdmin ? 'User' : 'Continue with email'}
+            title={'User'}
             containerStyles='w-full mt-7'
-            handlePress={
-              isAdmin
-                ? () => router.push('/(user)')
-                : () => router.push('/(user)/home')
-            }
+            handlePress={() => router.push('/(user)')}
           />
-          {isAdmin && (
-            <CustomButton
-              title='Admin'
-              containerStyles='w-full mt-7'
-              handlePress={() => router.push('/(admin)')}
-            />
-          )}
+
+          <CustomButton
+            title='Admin'
+            containerStyles='w-full mt-7'
+            handlePress={() => router.push('/(admin)')}
+          />
         </View>
       </ScrollView>
       <StatusBar style='auto' backgroundColor='auto' />
