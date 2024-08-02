@@ -27,6 +27,7 @@ export default function AuthProvider({ children }) {
           .select('*')
           .eq('id', session.user.id)
           .single();
+        console.log(data.full_name);
         setProfile(data || null);
       }
 

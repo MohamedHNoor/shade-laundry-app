@@ -7,9 +7,15 @@ import { ActivityIndicator } from 'react-native';
 import { useAuth } from '../providers/AuthProvider';
 
 const index = () => {
-  const { session, loading } = useAuth();
+  const { session, loading, isAdmin, profile } = useAuth();
 
-  if (!loading && session) return <Redirect href='/home' />;
+  if (loading) return <ActivityIndicator />;
+
+  if (!session) return <Redirect href='/sign-in' />;
+
+  if (profile?.group === 'ADMIN') {
+    <Redirect href='/' />;
+  }
 
   return (
     <SafeAreaView className='bg-white h-full'>
@@ -20,7 +26,6 @@ const index = () => {
             className='w-full h-[300px] max-w-[380px]'
             resizeMode='contain'
           />
-
           <View className=' mt-5'>
             <Text className='text-3xl text-primary font-bold text-center'>
               Discover Endless {'\n'} Possibilities with{' '}
@@ -33,13 +38,22 @@ const index = () => {
             Impeccable Service with The Shade Laundry.
           </Text>
 
-          {/* button */}
-          <Link href={'/(user)'} asChild>
-            <CustomButton title='User' containerStyles='w-full mt-7' />
-          </Link>
-          <Link href={'/sign-in'} asChild>
-            <CustomButton title='Admin' containerStyles='w-full mt-7' />
-          </Link>
+          <CustomButton
+            title={isAdmin ? 'User' : 'Continue with email'}
+            containerStyles='w-full mt-7'
+            handlePress={
+              isAdmin
+                ? () => router.push('/(user)')
+                : () => router.push('/(user)/home')
+            }
+          />
+          {isAdmin && (
+            <CustomButton
+              title='Admin'
+              containerStyles='w-full mt-7'
+              handlePress={() => router.push('/(admin)')}
+            />
+          )}
         </View>
       </ScrollView>
       <StatusBar style='auto' backgroundColor='auto' />
