@@ -1,8 +1,9 @@
 import { useFonts } from 'expo-font';
 import { Stack, SplashScreen } from 'expo-router';
 import { useEffect } from 'react';
-import AuthProvider, { useAuth } from '../providers/AuthProvider';
+import AuthProvider from '../providers/AuthProvider';
 import BasketProvider from '../providers/BasketProvider';
+import QueryProvider from '../providers/QueryProvider';
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -28,15 +29,17 @@ const RootLayout = () => {
 
   return (
     <AuthProvider>
-      <BasketProvider>
-        <Stack>
-          <Stack.Screen name='(admin)' options={{ headerShown: false }} />
-          <Stack.Screen name='(auth)' options={{ headerShown: false }} />
-          <Stack.Screen name='(user)' options={{ headerShown: false }} />
-          <Stack.Screen name='index' options={{ headerShown: false }} />
-          <Stack.Screen name='basket' options={{ presentation: 'modal' }} />
-        </Stack>
-      </BasketProvider>
+      <QueryProvider>
+        <BasketProvider>
+          <Stack>
+            <Stack.Screen name='(admin)' options={{ headerShown: false }} />
+            <Stack.Screen name='(auth)' options={{ headerShown: false }} />
+            <Stack.Screen name='(user)' options={{ headerShown: false }} />
+            <Stack.Screen name='index' options={{ headerShown: false }} />
+            <Stack.Screen name='basket' options={{ presentation: 'modal' }} />
+          </Stack>
+        </BasketProvider>
+      </QueryProvider>
     </AuthProvider>
   );
 };

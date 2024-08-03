@@ -1,16 +1,27 @@
-import { View, Text, Pressable, Image, SafeAreaView } from 'react-native';
+import {
+  View,
+  Text,
+  Pressable,
+  Image,
+  SafeAreaView,
+  ActivityIndicator,
+} from 'react-native';
 import { Link, Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
-import { products } from '../../../assets/data/products';
+import { useProduct } from '../../../api/products';
+import EmptyState from '../../../components/EmptyState';
 
 const ProductScreen = () => {
-  const { id } = useLocalSearchParams();
+  const { id: idString } = useLocalSearchParams();
 
-  const product = products.find((o) => o.id.toString() === id);
+  const id = parseFloat(typeof idString === 'string' ? idString : idString[0]);
 
-  if (!product) {
-    return <Text>Product not found!</Text>;
-  }
+  const { data: product, error, isLoading } = useProduct(id);
+
+  if (isLoading) return <ActivityIndicator />;
+
+  if (error) return <EmptyState title='Failed to fetch product' />;
+
   return (
     <SafeAreaView>
       <Stack.Screen

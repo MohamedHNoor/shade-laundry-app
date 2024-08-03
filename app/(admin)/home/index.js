@@ -5,17 +5,23 @@ import {
   Image,
   FlatList,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import EmptyState from '../../../components/EmptyState';
-import { products } from '../../../assets/data/products';
 import { services } from '../../../assets/data/services';
 import Services from '../../../components/Services';
 import ServiceCard from '../../../components/ServiceCard';
 import { useBasket } from '../../../providers/BasketProvider';
 import { router } from 'expo-router';
+import { useProductList } from '../../../api/products';
 
 const index = () => {
   const { items: basketItems, total } = useBasket();
+  const { data: products, error, isLoading } = useProductList();
+
+  if (isLoading) return <ActivityIndicator />;
+
+  if (error) return <EmptyState title='Failed to fetch products' />;
 
   return (
     <SafeAreaView className='flex-1'>

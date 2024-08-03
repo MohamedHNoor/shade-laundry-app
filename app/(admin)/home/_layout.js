@@ -1,7 +1,8 @@
-import { Stack, Link } from 'expo-router';
+import { Stack, Link, Redirect } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
-import Colors from '@/constants/Colors';
+import { useAuth } from '../../../providers/AuthProvider';
+import { ActivityIndicator } from 'react-native';
 
 export default function HomeLayout() {
   return (
