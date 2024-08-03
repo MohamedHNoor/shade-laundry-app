@@ -52,6 +52,7 @@ export const useInsertProduct = () => {
           price: data.price,
           quantity: data.quantity,
         })
+        .select()
         .single();
 
       if (error) {
